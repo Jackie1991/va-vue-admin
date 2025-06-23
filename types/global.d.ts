@@ -11,3 +11,8 @@ type ResponseData<T> = {
   message: string
   data: T
 }
+
+/**
+ * 定义一个响应数据类型
+ */
+type AnyFunction = (...args: any[]) => any

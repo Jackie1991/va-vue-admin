@@ -1,6 +1,7 @@
 /**
- * flex 布局
+ * 全局复用样式 管理class
  */
+
 // 循环 flex 属性
 $flex-map: (
   center: (
@@ -32,6 +33,7 @@ $flex-map: (
     flex-wrap: wrap,
   ),
 );
+// 创建flex布局
 @each $key, $value in $flex-map {
   .flex-#{$key} {
     display: flex;
@@ -43,4 +45,37 @@ $flex-map: (
 }
 .flex {
   display: flex;
+}
+
+// 绝对定位
+.pos-absolute {
+  position: absolute;
+}
+// 固定定位
+.pos-fixed {
+  position: fixed;
+}
+// 定位距离边缘记录
+@for $i from 0 through 6 {
+  $num: $i * 5;
+
+  .pos-inset-#{$num} {
+    inset: #{$num}px;
+  }
+}
+// 垂直居中
+.pos-y-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+// 水平居中
+.pos-x-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+// 垂直水平居中
+.pos-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

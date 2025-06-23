@@ -37,6 +37,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
           '@vueuse/core',
         ],
         resolvers: [ElementPlusResolver()],
+        dirs: ['src/hooks'],
         dts: 'types/auto-imports.d.ts',
       }),
       Components({

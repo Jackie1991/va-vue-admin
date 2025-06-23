@@ -1,8 +1,22 @@
 :root {
   // 导航栏高度
   --va-nav-height: 64px;
+  --va-nav-bg-color: #ffffff;
   // 标签栏高度
-  --va-tab-height: 40px;
+  --va-tabs-height: 40px;
+  --va-tabs-bg-color: #ffffff;
   // 侧边栏宽度
   --va-slide-width: 200px;
+  --va-slide-bg-color: #304156;
+  // 内容区域  样式
+  --va-main-bg-color: #f0f2f5;
+  --va-border-color: #f0f2f5;
+  --va-border: 1px solid var(--va-border-color);
+  --va-border-radius: 5px;
+  // 过渡
+  --va-transition-duration: 0.25s;
+  --va-transition-function-ease-in-out-bezier: cubic-bezier(0.42, 0, 0.58, 1);
+  --va-transition:
+    all var(--va-transition-duration) var(--va-transition-function-ease-in-out-bezier), border 0s,
+    color 0.05s, font-size 0s;
 }

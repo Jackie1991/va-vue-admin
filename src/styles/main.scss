@@ -12,7 +12,7 @@
   &::-webkit-scrollbar-thumb {
     background-color: rgba(#000000, 0.3);
     border-radius: 30px;
-    transition: var(--el-transition-duration) background-color;
+    transition: var(--va-transition-duration) background-color;
 
     &:hover {
       background-color: rgba(#909399, 0.5);
@@ -44,6 +44,11 @@ html {
 
     #app {
       min-height: 100vh;
+
+      &:not([class*='el-scrollbar']) {
+        transition: var(--va-transition);
+        @include base-scrollbar;
+      }
     }
 
     * {

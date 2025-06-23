@@ -2,7 +2,7 @@ import axios, { type InternalAxiosRequestConfig, type AxiosResponse } from 'axio
 import { toLower } from 'lodash-es'
 import baseURL from '@/utils/baseUrl'
 import { getAccessToken } from '@/utils/auth'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores'
 
 const router = useRouter()
 // 成功请求code
@@ -70,7 +70,7 @@ const responseConfig = (response: AxiosResponse): Promise<any | any> => {
   }
   // 若data.msg存在，覆盖默认提醒消息
   const errMsg = `${data && data[messageName] ? data[messageName] : CODE_MESSAGE[code] ? CODE_MESSAGE[code] : statusText}`
-  // if (errMsg) $baseMessage(errMsg, 'error')
+  if (errMsg) $baseMessage(errMsg, 'error')
   console.log(errMsg)
   throw data
 }
@@ -95,7 +95,7 @@ instance.interceptors.request.use(
       config.data = {}
     }
 
-    // if (!loadingInstance) loadingInstance = $baseLoading('请稍等...')
+    if (!loadingInstance) loadingInstance = $baseLoading('请稍等...')
 
     return config
   },

@@ -6,6 +6,9 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const $baseConfirm: typeof import('../src/hooks/index')['$baseConfirm']
+  const $baseLoading: typeof import('../src/hooks/index')['$baseLoading']
+  const $baseMessage: typeof import('../src/hooks/index')['$baseMessage']
   const EffectScope: typeof import('vue')['EffectScope']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
@@ -278,6 +281,7 @@ declare global {
   const useTransition: typeof import('@vueuse/core')['useTransition']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia']
+  const useUtils: typeof import('../src/hooks/index')['useUtils']
   const useVModel: typeof import('@vueuse/core')['useVModel']
   const useVModels: typeof import('@vueuse/core')['useVModels']
   const useVibrate: typeof import('@vueuse/core')['useVibrate']

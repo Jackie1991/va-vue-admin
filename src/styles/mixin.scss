@@ -1,0 +1,16 @@
+/**
+ * @name 文本超出省略号
+ * @param $n 超出几行
+ */
+@mixin text-ellipsis($n: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @if $n == 1 {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $n;
+    line-clamp: $n;
+  }
+}
