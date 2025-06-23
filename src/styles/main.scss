@@ -1,7 +1,28 @@
+@use 'normalize.css';
+@use 'element-plus/theme-chalk/src/display';
+@use 'element-plus/theme-chalk/src/index';
 @use './var.scss' as *;
+@use './base.scss' as *;
+
+@mixin base-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(#000000, 0.3);
+    border-radius: 30px;
+    transition: var(--el-transition-duration) background-color;
+
+    &:hover {
+      background-color: rgba(#909399, 0.5);
+    }
+  }
+}
 
 html {
   body {
+    margin: 0;
     font-family:
       Inter,
       -apple-system,
@@ -15,10 +36,11 @@ html {
       'Droid Sans',
       'Helvetica Neue',
       sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    @include base-scrollbar;
 
     #app {
       min-height: 100vh;
@@ -27,6 +49,9 @@ html {
     * {
       box-sizing: border-box;
       scroll-behavior: smooth;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
     }
   }
 }

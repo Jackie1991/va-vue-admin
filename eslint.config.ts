@@ -29,6 +29,12 @@ export default defineConfigWithVueTs(
       'vue/custom-event-name-casing': ['error', 'kebab-case'],
       'vue/attribute-hyphenation': ['error', 'always'],
       'prettier/prettier': 'error', // 添加 Prettier 规则
+      'vue/multi-word-component-names': [
+        'error',
+        {
+          ignores: ['index', '403', '404'], // 可选：忽略特定组件名
+        },
+      ],
 
       // 确保 import 语句在文件最前面
       'import/first': 'error',
@@ -54,6 +60,7 @@ export default defineConfigWithVueTs(
     rules: {
       ...pluginTypescript.configs.recommended.rules,
       '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
 )

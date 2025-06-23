@@ -1,14 +1,20 @@
 import '@/styles/main.scss'
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-
 import App from './App.vue'
-import router from '@/router'
+import { setupRouter } from '@/router'
+import { setupStore } from '@/stores'
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
+// 自定义插件功能引入
+const Plugins = import.meta.glob('./plugins/*.ts', { eager: true })
+Object.getOwnPropertyNames(Plugins).forEach((key) => {
+  const plugin: any = Plugins[key]
+  app.use(plugin.default)
+})
+
+setupRouter(app)
+setupStore(app)
 
 app.mount('#app')

@@ -1,21 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSettingStore } from '@/stores'
+
+const settingStore = useSettingStore()
+</script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-      </nav>
-    </div>
-  </header>
-
-  <router-view />
+  <el-config-provider :locale="settingStore.locale">
+    <router-view />
+  </el-config-provider>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;

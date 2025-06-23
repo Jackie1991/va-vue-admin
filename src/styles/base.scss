@@ -1,0 +1,46 @@
+/**
+ * flex 布局
+ */
+// 循环 flex 属性
+$flex-map: (
+  center: (
+    align-items: center,
+    justify-content: center,
+  ),
+  x-center: (
+    align-items: center,
+  ),
+  y-center: (
+    justify-content: center,
+  ),
+  between: (
+    justify-content: space-between,
+  ),
+  around: (
+    justify-content: space-around,
+  ),
+  row-reverse: (
+    flex-direction: row-reverse,
+  ),
+  column: (
+    flex-direction: column,
+  ),
+  column-reverse: (
+    flex-direction: column-reverse,
+  ),
+  wrap: (
+    flex-wrap: wrap,
+  ),
+);
+@each $key, $value in $flex-map {
+  .flex-#{$key} {
+    display: flex;
+    // 循环遍历子map并添加对应的属性
+    @each $prop, $val in $value {
+      #{$prop}: $val;
+    }
+  }
+}
+.flex {
+  display: flex;
+}
