@@ -1,5 +1,5 @@
 <template>
-  <div class="index-container flex-column">index</div>
+  <div class="index-container flex-column">1</div>
 </template>
 
 <script lang="ts" setup></script>

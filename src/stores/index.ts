@@ -9,4 +9,6 @@ export const setupStore = (app: App<Element>) => {
 
 export * from './modules/setting.store'
 export * from './modules/user.store'
+export * from './modules/routes.store'
+export * from './modules/tabs.store'
 export { store }

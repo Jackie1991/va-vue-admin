@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
@@ -16,6 +17,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     VaForm: typeof import('./../src/components/VaForm/VaForm.vue')['default']
     VaFormItem: typeof import('./../src/components/VaForm/VaFormItem.vue')['default']
+    VaInlineForm: typeof import('./../src/components/VaInlineForm/VaInlineForm.vue')['default']
     VaNavbar: typeof import('./../src/components/VaNavbar/VaNavbar.vue')['default']
   }
 }

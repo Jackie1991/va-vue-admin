@@ -8,6 +8,13 @@ export const useSettingStore = defineStore('setting', () => {
   const language = ref<LanguageType>('zh-CN')
   // 当前语言
   const locale = computed(() => (language.value === 'zh-CN' ? zhCn : en))
+  // 项目title
+  const title = 'Va Admin'
 
-  return { locale }
+  // 切换语言
+  const toggleLanguage = () => {
+    language.value = language.value === 'zh-CN' ? 'en' : 'zh-CN'
+  }
+
+  return { locale, title, toggleLanguage }
 })

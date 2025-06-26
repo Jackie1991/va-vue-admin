@@ -1,10 +1,10 @@
 import axios, { type InternalAxiosRequestConfig, type AxiosResponse } from 'axios'
 import { toLower } from 'lodash-es'
+import router from '@/router'
 import baseURL from '@/utils/baseUrl'
 import { getAccessToken } from '@/utils/auth'
 import { useUserStore } from '@/stores'
 
-const router = useRouter()
 // 成功请求code
 const statusName = 'code'
 // 返回消息字段
@@ -46,6 +46,7 @@ const instance = axios.create({
 const responseConfig = (response: AxiosResponse): Promise<any | any> => {
   const { data, status, statusText } = response
   const { resetAll } = useUserStore()
+
   if (loadingInstance) loadingInstance.close()
 
   // 处理响应状态码
@@ -71,7 +72,6 @@ const responseConfig = (response: AxiosResponse): Promise<any | any> => {
   // 若data.msg存在，覆盖默认提醒消息
   const errMsg = `${data && data[messageName] ? data[messageName] : CODE_MESSAGE[code] ? CODE_MESSAGE[code] : statusText}`
   if (errMsg) $baseMessage(errMsg, 'error')
-  console.log(errMsg)
   throw data
 }
 

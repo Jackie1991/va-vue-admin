@@ -28,13 +28,14 @@ export default defineConfigWithVueTs(
       // 强制自定义事件名称使用kebab-case
       'vue/custom-event-name-casing': ['error', 'kebab-case'],
       'vue/attribute-hyphenation': ['error', 'always'],
-      'prettier/prettier': 'error', // 添加 Prettier 规则
       'vue/multi-word-component-names': [
         'error',
         {
-          ignores: ['index', '403', '404'], // 可选：忽略特定组件名
+          ignores: ['index', '403', '404', 'detail', 'list', 'edit', 'create'], // 可选：忽略特定组件名，仅忽略个别常用关键名称
         },
       ],
+
+      'prettier/prettier': 'error', // 添加 Prettier 规则
 
       // 确保 import 语句在文件最前面
       'import/first': 'error',

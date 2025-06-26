@@ -1,23 +1,17 @@
 <template>
-  <el-form-item class="va-form-item" v-bind="formItemAttrs">
-    <el-input v-model="value" />
+  <el-form-item class="va-form-item" v-bind="propsAttrs.formItemAttrs">
+    <template v-if="['text', 'textarea', 'password', 'tel', 'number'].includes(props.type)">
+      <el-input v-model="value" :show-password="props.type === 'password'" v-bind="propsAttrs.formItemContentAttrs" />
+    </template>
   </el-form-item>
 </template>
 
 <script setup lang="ts">
-import { omit } from 'lodash-es'
-import type { FormItemProps as ElFormItemProps } from 'element-plus'
-
-// form-item 组件需要的属性类型
-type FormItemType = Partial<ElFormItemProps>
-// 对外暴露的属性类型
-export interface FormItemProps extends FormItemType {
-  prop: string // 必填 表单对应的字段名
-  hidden?: boolean // 默认为 false
-}
+import { keys, each } from 'lodash-es'
+import type { FieldProps, FormItemProps, FormItemContentProps, FormItemKeys } from './type.d.ts'
 
 // 内部使用的属性类型
-interface Props extends FormItemProps {
+interface Props extends FieldProps {
   modelValue: any
 }
 const props = defineProps<Props>()
@@ -25,7 +19,23 @@ const emits = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
+// 获取 v-model 绑定的属性值
 const value = useVModel(props, 'modelValue', emits)
-
-const formItemAttrs = omit(props, ['modelValue', 'hidden'])
+// 需要过滤的属性
+const filterKeys = ['modelValue', 'type']
+// form-item 的属性
+const formItemKeys: FormItemKeys[] = ['prop', 'label', 'labelPosition', 'labelWidth', 'rules', 'size', 'required']
+// 获取 va-form-item 的属性值
+const propsAttrs = computed<{ formItemAttrs: FormItemProps; formItemContentAttrs: FormItemContentProps }>(() => {
+  const params = { formItemAttrs: {}, formItemContentAttrs: {} }
+  each(keys(props), (key: string) => {
+    if (!props[key] || filterKeys.includes(key)) return
+    if (formItemKeys.includes(key as FormItemKeys)) {
+      params.formItemAttrs[key] = props[key]
+    } else {
+      params.formItemContentAttrs[key] = props[key]
+    }
+  })
+  return params
+})
 </script>

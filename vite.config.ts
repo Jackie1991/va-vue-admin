@@ -5,6 +5,8 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import progress from 'vite-plugin-progress'
+import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
 
 // 自定义组件解析器
 const customResolver = (name: string) => {
@@ -23,8 +25,18 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, process.cwd())
 
   return {
+    server: {
+      proxy: {
+        '/api': {
+          target: env.VITE_API_BASE_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
     plugins: [
       vue(),
+      env.VITE_MOCK_SERVER === 'true' ? mockDevServerPlugin() : null,
       vueDevTools(),
       AutoImport({
         imports: [
@@ -52,6 +64,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         extensions: ['vue'],
         include: [/\.vue$/, /\.vue\?vue/],
       }),
+      progress(),
     ],
     resolve: {
       alias: {

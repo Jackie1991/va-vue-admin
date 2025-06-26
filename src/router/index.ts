@@ -1,8 +1,12 @@
 import type { App } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, type RouteRecordRaw, type RouteRecordName } from 'vue-router'
+import { setupPermissions } from './permissions'
 
-// 默认路由
-const constantRoutes = [
+// 是否远程路由
+const HAS_REMOTE_ROUTES = true
+
+// 默认全局路由。不论远程路由还是本地路由均需要配置
+const constantRoutes: VaRouteRecord[] = [
   {
     path: '/login',
     name: 'Login',
@@ -27,25 +31,78 @@ const constantRoutes = [
       hidden: true,
     },
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
+    name: 'NotFound',
+    meta: {
+      title: '404',
+      hidden: true,
+    },
+  },
 ]
 
-// 路由配置
-const pageRoutes = [
+// 首页独立路由
+export const homeRoutes: VaRouteRecord = {
+  path: '/',
+  name: 'Index',
+  component: () => import('@/views/index/index.vue'),
+  meta: {
+    title: '首页',
+    levelHidden: true,
+    noClosable: true,
+  },
+}
+
+// 路由列表
+export const asyncRoutes: VaRouteRecord[] = [
   {
-    path: '/',
-    name: 'home',
-    component: () => import('../views/index/index.vue'),
+    path: '/demo',
+    name: 'Demo',
+    component: () => import('@/views/demo/index.vue'),
+    meta: {
+      title: 'DEMO',
+      levelHidden: true,
+    },
+    children: [
+      {
+        path: '/Detail',
+        name: 'Detail',
+        component: () => import('@/views/demo/detail.vue'),
+        meta: {
+          title: '表单',
+        },
+      },
+    ],
   },
 ]
 
 // 创建路由实例并传递 `routes` 配置
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [...pageRoutes, ...constantRoutes],
+  routes: [...asyncRoutes, ...constantRoutes] as RouteRecordRaw[],
 })
+
+// 添加路由
+const addRouter = (routes: VaRouteRecord[]) => {
+  routes.forEach((route: VaRouteRecord) => {
+    if (!router.hasRoute(route.name)) router.addRoute(route as RouteRecordRaw)
+    if (route.children) addRouter(route.children)
+  })
+}
+
+// 重置路由
+export const resetRouter = (routes: VaRouteRecord[]) => {
+  routes.forEach((route: VaRouteRecord) => {
+    const routeName: RouteRecordName = route.name
+    if (router.hasRoute(routeName)) router.removeRoute(routeName)
+  })
+  addRouter(routes)
+}
 
 // 确保 router 创建后被调用
 export const setupRouter = (app: App<Element>) => {
+  setupPermissions(router, HAS_REMOTE_ROUTES)
   app.use(router)
 }
 

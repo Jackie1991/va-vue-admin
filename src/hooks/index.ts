@@ -5,7 +5,7 @@ import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
  * @param {*}
  */
 export const $baseLoading = (text: string, background = 'rgba(0, 0, 0, 0.1)') => {
-  ElLoading.service({
+  return ElLoading.service({
     lock: true,
     text,
     background,
