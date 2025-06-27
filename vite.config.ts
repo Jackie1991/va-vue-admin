@@ -26,6 +26,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 
   return {
     server: {
+      port: 0, // 随机端口
       proxy: {
         '/api': {
           target: env.VITE_API_BASE_URL,

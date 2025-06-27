@@ -83,7 +83,7 @@ instance.interceptors.request.use(
     const accessToken = getAccessToken()
     // 如果 Authorization 设置为 no-auth，则不携带 Token
     if (config.headers.Authorization !== 'no-auth' && accessToken) {
-      config.headers.Authorization = accessToken
+      config.headers.Authorization = `Bearer ${accessToken}`
     } else {
       delete config.headers.Authorization
     }

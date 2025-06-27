@@ -1,0 +1,122 @@
+.loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #789;
+}
+
+.loading .waving {
+  perspective: 1000px;
+}
+
+.loading .waving>span {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 5rem;
+  color: white;
+  text-transform: uppercase;
+  transform-origin: top;
+  animation: waving 1s infinite ease-in-out;
+  animation-fill-mode: backwards;
+}
+
+
+.loading .waving>span:nth-child(1) {
+  animation-delay: .12s
+}
+
+.loading .waving>span:nth-child(2) {
+  animation-delay: .24s
+}
+
+.loading .waving>span:nth-child(3) {
+  animation-delay: .36s
+}
+
+.loading .waving>span:nth-child(4) {
+  animation-delay: .48s
+}
+
+.loading .waving>span:nth-child(5) {
+  animation-delay: .6s
+}
+
+.loading .waving>span:nth-child(6) {
+  animation-delay: .72s
+}
+
+.loading .waving>span:nth-child(7) {
+  animation-delay: .84s
+}
+
+.loading .waving>span:nth-child(8) {
+  animation-delay: .96s
+}
+
+.loading .waving>span:nth-child(9) {
+  animation-delay: 1.08s
+}
+
+.loading .waving>span:nth-child(10) {
+  animation-delay: 1.2s
+}
+
+.loading .waving>span:nth-child(11) {
+  animation-delay: 1.32s
+}
+
+.loading .waving>span:nth-child(12) {
+  animation-delay: 1.44s
+}
+
+.loading .waving>span:nth-child(13) {
+  animation-delay: 1.56s
+}
+
+.loading .waving>span:nth-child(14) {
+  animation-delay: 1.68s
+}
+
+.loading .waving>span:nth-child(15) {
+  animation-delay: 1.8s
+}
+
+.loading .waving>span:nth-child(16) {
+  animation-delay: 1.92s
+}
+
+.loading .waving>span:nth-child(17) {
+  animation-delay: 2.04s
+}
+
+.loading .waving>span:nth-child(18) {
+  animation-delay: 2.16s
+}
+
+.loading .waving>span:nth-child(19) {
+  animation-delay: 2.28s
+}
+
+.loading .waving>span:nth-child(20) {
+  animation-delay: 2.4s
+}
+
+@keyframes waving {
+  0% {
+    transform: rotateX(30deg) translateY(0);
+    text-shadow: 0 3px 0 #ccc, 0px 10px 10px rgba(0, 0, 0, 0.5)
+  }
+
+  50% {
+    transform: rotateX(45deg) translateY(-20px);
+    text-shadow: 0 3px 0 #ccc, 0px 55px 20px rgba(0, 0, 0, 0.4)
+  }
+
+  100% {
+    transform: rotateX(30deg) translateY(0);
+    text-shadow: 0 3px 0 #ccc, 0px 10px 10px rgba(0, 0, 0, 0.5)
+  }
+}

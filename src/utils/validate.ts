@@ -1,4 +1,13 @@
 /**
+ * @description 判读是否为外链
+ * @param value
+ * @returns {boolean}
+ */
+export const isExternal = (value: string) => {
+  return /^(https?:|mailto:|tel:|\/\/)/.test(value)
+}
+
+/**
  * @description: 邮箱验证
  * @param {string} email 邮箱
  * @returns {Boolean}

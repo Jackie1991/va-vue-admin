@@ -50,7 +50,8 @@ export const setupPermissions = (router: Router, hasRemote: boolean) => {
           // 根据是否开启远程路由设置路由
           await setRoutes(hasRemote)
 
-          next({ ...to, replace: true })
+          const path = to.redirectedFrom ? to.redirectedFrom.fullPath : to.fullPath
+          next({ path, replace: true })
         } catch (error) {
           console.error('错误拦截:', error)
           await resetAll()

@@ -7,6 +7,7 @@ import { getList } from '@/api/routes'
  * @returns {*}
  */
 const convertRouter = (routes: VaRouteRecord[]) => {
+  // 排除特殊路由后项目中所有可用路由
   const viewsComMap = import.meta.glob([
     '/src/views/**/*.vue',
     '!/src/views/**/components/**', // 排除views目录下页面内的components目录下的文件

@@ -6,12 +6,13 @@ import { setupPermissions } from './permissions'
 const HAS_REMOTE_ROUTES = true
 
 // 默认全局路由。不论远程路由还是本地路由均需要配置
-const constantRoutes: VaRouteRecord[] = [
+export const constantRoutes = [
   {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
     meta: {
+      title: '登录',
       hidden: true,
     },
   },
@@ -20,6 +21,7 @@ const constantRoutes: VaRouteRecord[] = [
     name: '403',
     component: () => import('@/views/error/403.vue'),
     meta: {
+      title: '403',
       hidden: true,
     },
   },
@@ -28,6 +30,7 @@ const constantRoutes: VaRouteRecord[] = [
     name: '404',
     component: () => import('@/views/error/404.vue'),
     meta: {
+      title: '404',
       hidden: true,
     },
   },
@@ -62,7 +65,6 @@ export const asyncRoutes: VaRouteRecord[] = [
     component: () => import('@/views/demo/index.vue'),
     meta: {
       title: 'DEMO',
-      levelHidden: true,
     },
     children: [
       {
@@ -80,13 +82,13 @@ export const asyncRoutes: VaRouteRecord[] = [
 // 创建路由实例并传递 `routes` 配置
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes: [...asyncRoutes, ...constantRoutes] as RouteRecordRaw[],
+  routes: constantRoutes as RouteRecordRaw[],
 })
 
 // 添加路由
 const addRouter = (routes: VaRouteRecord[]) => {
   routes.forEach((route: VaRouteRecord) => {
-    if (!router.hasRoute(route.name)) router.addRoute(route as RouteRecordRaw)
+    if (!router.hasRoute(route.name)) router.addRoute(route as unknown as RouteRecordRaw)
     if (route.children) addRouter(route.children)
   })
 }

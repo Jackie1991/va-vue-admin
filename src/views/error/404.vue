@@ -1,9 +1,9 @@
 <template>
-  <div class="error-container">404</div>
+  <div class="error-container flex-center">
+    <div class="number" data-text="404">404</div>
+    <p class="tips">请检查地址是否正确，或单击下面的按钮返回主页。</p>
+    <router-link class="come-back" to="/">返回首页</router-link>
+  </div>
 </template>
 
-<script lang="ts" setup></script>
-
-<style lang="scss" scoped>
-// .error-container {}
-</style>
+<style scoped src="./error.scss" />

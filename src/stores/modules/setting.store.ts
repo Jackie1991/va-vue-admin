@@ -1,20 +1,29 @@
-import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
-
 // 语言类型
-type LanguageType = 'zh-CN' | 'en'
-
 export const useSettingStore = defineStore('setting', () => {
-  const language = ref<LanguageType>('zh-CN')
-  // 当前语言
-  const locale = computed(() => (language.value === 'zh-CN' ? zhCn : en))
   // 项目title
   const title = 'Va Admin'
+  // 当前语言
+  const language = ref<LanguageType>('zh')
+  // 侧边栏折叠状态
+  const collapse = ref<boolean>(JSON.parse(localStorage.getItem('collapse') || 'false'))
 
-  // 切换语言
-  const toggleLanguage = () => {
-    language.value = language.value === 'zh-CN' ? 'en' : 'zh-CN'
+  return {
+    language,
+    title,
+    collapse,
+    // 切换语言
+    toggleLanguage: () => {
+      language.value = language.value === 'zh' ? 'en' : 'zh'
+    },
+    // 切换侧边栏折叠状态
+    toggleCollapse: () => {
+      collapse.value = !collapse.value
+      localStorage.setItem('collapse', collapse.value.toString())
+    },
+    // 修改折叠状态
+    updateCollapse: (state: boolean) => {
+      collapse.value = state
+      localStorage.setItem('collapse', collapse.value.toString())
+    },
   }
-
-  return { locale, title, toggleLanguage }
 })

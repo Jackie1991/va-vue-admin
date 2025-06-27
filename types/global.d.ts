@@ -54,3 +54,9 @@ type UserInfoInstance = {
   usercode: string
   avatar: string
 }
+
+interface ComponentType {
+  default: Component
+}
+
+type LanguageType = 'zh' | 'en'
