@@ -9,6 +9,8 @@ interface VaRouteMeta {
   noClosable?: boolean
   // 在新窗口中打开
   target?: '_blank' | false
+  // 菜单显示的icon
+  icon?: string
 }
 
 interface VaRouteRecord extends Omit<RouteRecordRaw, 'meta'> {
@@ -21,4 +23,11 @@ interface VaRouteRecord extends Omit<RouteRecordRaw, 'meta'> {
   components?: Component | string
   children?: VaRouteRecord[]
   redirect?: string | (() => string)
+  childrenPathList?: (string | undefined)[]
+}
+
+interface VaRoute extends Omit<VaRouteRecord, 'children' | 'childrenPathList'> {
+  query?: any
+  params?: any
+  matched?: VaRoute[]
 }

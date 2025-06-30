@@ -11,19 +11,22 @@
         <component :is="Components['VaTabs']" />
       </div>
       <div class="va-layout-body">
-        <router-view></router-view>
+        <router-view />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useSettingStore } from '@/stores'
+import { useSettingStore, useRoutesStore } from '@/stores'
 import { getComponents } from '@/utils/component'
 
 const imports = import.meta.glob<ComponentType>('./components/*.vue', { eager: true })
 const Components = getComponents(imports)
 
+const route = useRoute()
+const routesStore = useRoutesStore()
+const { activeMenu } = storeToRefs(routesStore)
 const settingStore = useSettingStore()
 const { collapse } = storeToRefs(settingStore)
 const { updateCollapse } = settingStore
@@ -33,6 +36,14 @@ const resizeBody = () => {
   const { width } = useWindowSize()
   mobile.value = width.value - 1 < 992
 }
+
+watch(
+  () => route,
+  () => {
+    activeMenu.value = route.path
+  },
+  { immediate: true },
+)
 
 onBeforeMount(() => {
   resizeBody()
@@ -46,40 +57,45 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .va-layout {
+  --va-layout-sidebar-width: var(--va-sidebar-width);
   overflow: hidden;
 
   &-side {
     position: fixed;
     z-index: 9;
     inset: 0 auto 0 0;
-    width: var(--va-side-width);
+    width: var(--va-layout-sidebar-width);
     color: white;
-    background-color: var(--va-side-bg-color);
+    background-color: var(--va-sidebar-bg-color);
     overflow: hidden;
     transition: all 0.15s;
   }
 
   &-main {
-    margin-left: var(--va-side-width);
+    margin-left: var(--va-layout-sidebar-width);
     background-color: var(--va-main-bg-color);
   }
 
   &-header {
     position: fixed;
-    inset: 0 0 auto var(--va-side-width);
+    inset: 0 0 auto var(--va-layout-sidebar-width);
     z-index: 2;
   }
 
   &-body {
     position: relative;
     z-index: 1;
-    padding: var(--va-main-padding);
+    padding: var(--va-padding);
     margin-top: calc(var(--va-nav-height) + var(--va-tabs-height));
 
     [class*='-container'] {
-      min-height: calc(100vh - var(--va-nav-height) - var(--va-tabs-height) - var(--va-main-padding) * 2);
+      min-height: calc(100vh - var(--va-nav-height) - var(--va-tabs-height) - var(--va-padding) * 2);
       background-color: white;
     }
+  }
+
+  &.is-collapse {
+    --va-layout-sidebar-width: 64px;
   }
 
   .mobile-mask {
@@ -90,6 +106,8 @@ onBeforeUnmount(() => {
   }
 
   &.mobile {
+    --va-layout-sidebar-width: var(--va-sidebar-width);
+
     .va-layout-side {
       z-index: 10;
       width: 0;
@@ -105,7 +123,7 @@ onBeforeUnmount(() => {
 
     &.is-collapse {
       .va-layout-side {
-        width: var(--va-side-width);
+        width: var(--va-layout-sidebar-width);
       }
     }
   }

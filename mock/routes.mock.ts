@@ -10,17 +10,28 @@ export default defineMock([
       data: [
         {
           name: 'Demo',
-          path: '/demo',
-          component: '/views/demo/index.vue',
+          path: '/',
           meta: { title: 'Demo' },
           children: [
             {
+              name: 'DemoHome',
+              path: '/demo',
+              meta: { title: 'Demo' },
+            },
+            {
               name: 'DemoDetail',
               path: '/demo/detail',
-              component: '/views/demo/detail.vue',
               meta: { title: 'Demo详情' },
             },
           ],
+        },
+        {
+          path: '/web',
+          name: 'Web',
+          meta: {
+            title: '门户',
+            target: '_blank',
+          },
         },
       ],
     },

@@ -1,3 +1,5 @@
+import { useI18n } from 'vue-i18n'
+
 // 语言类型
 export const useSettingStore = defineStore('setting', () => {
   // 项目title
@@ -13,7 +15,9 @@ export const useSettingStore = defineStore('setting', () => {
     collapse,
     // 切换语言
     toggleLanguage: () => {
+      const { locale } = useI18n()
       language.value = language.value === 'zh' ? 'en' : 'zh'
+      locale.value = language.value
     },
     // 切换侧边栏折叠状态
     toggleCollapse: () => {

@@ -1,14 +1,15 @@
 import type { App } from 'vue'
 import { createPinia } from 'pinia'
 
-const store = createPinia()
+const pinia = createPinia()
 
 export const setupStore = (app: App<Element>) => {
-  app.use(store)
+  app.use(pinia)
 }
 
 export * from './modules/setting.store'
 export * from './modules/user.store'
 export * from './modules/routes.store'
 export * from './modules/tabs.store'
-export { store }
+
+export default pinia

@@ -1,8 +1,6 @@
 import type { Router } from 'vue-router'
 import { useSettingStore, useUserStore, useRoutesStore } from '@/stores'
-
-// 路由白名单
-const routesWhiteList = ['/login', '/register', '/password', '/404', '/403']
+import { routesWhiteList } from './index'
 
 /**
  * @description 设置标题

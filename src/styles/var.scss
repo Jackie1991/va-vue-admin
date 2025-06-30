@@ -1,22 +1,25 @@
 :root {
   // 导航栏高度
-  --va-nav-height: 64px;
+  --va-nav-height: 50px;
   --va-nav-bg-color: #ffffff;
   // 标签栏高度
-  --va-tabs-height: 40px;
+  --va-tabs-height: 34px;
   --va-tabs-bg-color: #ffffff;
+  // logo容器高度
+  --va-logo-height: var(--va-nav-height);
+  --va-logo-bg-color: #2b2f3a;
   // 侧边栏宽度
-  --va-side-width: 200px;
-  --va-side-bg-color: #304156;
+  --va-sidebar-width: 200px;
+  --va-sidebar-bg-color: #304156;
   // 内容区域  样式
   --va-main-bg-color: #f0f2f5;
-  --va-main-padding: 20px;
+  --va-padding: 20px;
   --va-border-color: #f0f2f5;
   --va-border: 1px solid var(--va-border-color);
   --va-border-radius: 5px;
   // 菜单样式
   --va-menu-bg-color: #304156;
-  --va-menu-hover-bg-color: #212d3b;
+  --va-menu-hover-bg-color: #263445;
   --va-menu-color-text: #ffffff;
   // 过渡
   --va-transition-duration: 0.25s;

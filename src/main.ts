@@ -15,8 +15,8 @@ Object.getOwnPropertyNames(Plugins).forEach((key) => {
   app.use(plugin.default)
 })
 
-setupRouter(app)
 setupStore(app)
+setupRouter(app)
 setupI18n(app)
 
 app.mount('#app')

@@ -4,6 +4,7 @@
       background-color="var(--va-menu-bg-color)"
       :collapse="collapse"
       :collapse-transition="false"
+      :default-active="activeMenu"
       menu-trigger="click"
       mode="vertical"
       text-color="var(--va-menu-color-text)"
@@ -21,7 +22,7 @@ defineProps<{
   collapse: boolean
 }>()
 const routesStore = useRoutesStore()
-const { routes } = storeToRefs(routesStore)
+const { routes, activeMenu } = storeToRefs(routesStore)
 
 const menuRoutes = computed(() =>
   routes.value.flatMap((route: any) => (route.meta.levelHidden && route.children ? [...route.children] : route)),
