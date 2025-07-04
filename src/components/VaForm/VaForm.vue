@@ -1,7 +1,11 @@
 <template>
   <el-form ref="formRef" class="va-form" :model="form" v-bind="restProps">
     <template v-for="field in fieldList" :key="field.prop">
-      <va-form-item v-model="form[field.prop]" v-bind="field" />
+      <va-form-item v-model="form[field.prop]" v-bind="field">
+        <template v-if="$slots[field.prop]" #[field.prop]="slotProps">
+          <slot :name="field.prop" v-bind="{ ...slotProps }"></slot>
+        </template>
+      </va-form-item>
     </template>
     <el-form-item v-if="!hideButton" class="va-form-footer" label="&nbsp;">
       <slot name="footer">
@@ -28,7 +32,7 @@ const props = withDefaults(defineProps<FormProps>(), {
   labelWidth: 'auto',
   scrollToError: true,
   showMessage: true,
-  buttons: 'submit,reset,cancel',
+  buttons: 'submit,reset',
   submitText: '提交',
   hideButton: false,
 })
@@ -94,3 +98,13 @@ onMounted(() => {
   defaultValue.value = cloneDeep(props.modelValue)
 })
 </script>
+
+<style lang="scss" scoped>
+.va-form {
+  height: fit-content;
+
+  &-footer {
+    margin-bottom: 0;
+  }
+}
+</style>

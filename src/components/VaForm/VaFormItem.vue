@@ -1,8 +1,11 @@
 <template>
   <el-form-item class="va-form-item" v-bind="propsAttrs.formItemAttrs">
-    <template v-if="['text', 'textarea', 'password', 'tel', 'number'].includes(props.type)">
-      <el-input v-model="value" :show-password="props.type === 'password'" v-bind="propsAttrs.formItemContentAttrs" />
-    </template>
+    <!-- 表单插槽 将表单元素的props传入 -->
+    <slot :name="prop" :config="propsAttrs.formItemContentAttrs">
+      <template v-if="['text', 'textarea', 'password', 'tel', 'number'].includes(props.type)">
+        <el-input v-model="value" :show-password="props.type === 'password'" v-bind="propsAttrs.formItemContentAttrs" />
+      </template>
+    </slot>
   </el-form-item>
 </template>
 

@@ -1,11 +1,17 @@
 <template>
   <div class="va-navbar flex-x-center">
-    <el-button :icon="Expand" link @click="toggleCollapse" />
-    <el-breadcrumb class="vab-breadcrumb" separator="/">
-      <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index" :to="handleTo(item.redirect)">
-        <span>{{ translate(item.meta.title) }}</span>
-      </el-breadcrumb-item>
+    <el-button class="va-navbar-collapse" :icon="Expand" link @click="toggleCollapse" />
+
+    <!-- 面包屑当前位置 -->
+    <el-breadcrumb class="va-navbar-breadcrumb" separator="/">
+      <template v-for="(item, index) in breadcrumbList" :key="index">
+        <el-breadcrumb-item v-if="item.name !== 'Root'" :to="handleTo(item.redirect)">
+          <span>{{ translate(item.meta.title) }}</span>
+        </el-breadcrumb-item>
+      </template>
     </el-breadcrumb>
+
+    <va-avatar />
   </div>
 </template>
 
@@ -41,5 +47,14 @@ const handleTo = (path: any) => {
   height: var(--va-nav-height);
   background-color: var(--va-nav-bg-color);
   padding: 0 15px;
+
+  &-collapse {
+    font-size: 1.4em;
+    margin-right: 10px;
+  }
+
+  &-breadcrumb {
+    margin-right: auto;
+  }
 }
 </style>

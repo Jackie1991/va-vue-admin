@@ -8,6 +8,7 @@ import request from '@/utils/request'
 export type LoginInfo = {
   username: string
   password: string
+  verificationCode: string
 }
 export const login = (loginInfo: { username: string; password: string }) => {
   return request.post('/api/login', loginInfo)

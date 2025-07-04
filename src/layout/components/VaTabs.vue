@@ -5,9 +5,12 @@
         v-for="item in visitedRoutes"
         :key="item.path"
         :name="item.path"
-        :label="item.meta.title"
         :closable="!(item.meta && item.meta.noClosable)"
-      />
+      >
+        <template #label>
+          <span class="va-tabs-title" @contextmenu.prevent="openMenu(item)">{{ item.meta.title }}</span>
+        </template>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -63,6 +66,10 @@ const handleTabClick = (tab: any) => {
 const handleTabRemove = async (rawPath: any) => {
   if (isActive(rawPath)) await toLastTab()
   await removeVisitedRoute(rawPath)
+}
+
+const openMenu = (item: any) => {
+  console.log(item)
 }
 
 watch(

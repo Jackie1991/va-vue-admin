@@ -57,9 +57,10 @@ export const setupPermissions = (router: Router, hasRemote: boolean) => {
         }
       }
     } else {
-      if (routesWhiteList.includes(to.path)) {
+      const routeTo = to.path === '/404' && to.redirectedFrom ? to.redirectedFrom : to
+      if (routesWhiteList.includes(routeTo.path)) {
         next()
-      } else next(toLoginRoute(to.fullPath))
+      } else next(toLoginRoute(routeTo.fullPath))
     }
   })
 

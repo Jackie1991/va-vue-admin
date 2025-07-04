@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -24,11 +25,13 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VaAvatar: typeof import('./../src/components/VaAvatar/VaAvatar.vue')['default']
     VaForm: typeof import('./../src/components/VaForm/VaForm.vue')['default']
     VaFormItem: typeof import('./../src/components/VaForm/VaFormItem.vue')['default']
     VaInlineForm: typeof import('./../src/components/VaInlineForm/VaInlineForm.vue')['default']
     VaMenu: typeof import('./../src/components/VaMenu/VaMenu.vue')['default']
     VaMenuItem: typeof import('./../src/components/VaMenu/VaMenuItem.vue')['default']
     VaSubMenu: typeof import('./../src/components/VaMenu/VaSubMenu.vue')['default']
+    VaTable: typeof import('./../src/components/VaTable/VaTable.vue')['default']
   }
 }
