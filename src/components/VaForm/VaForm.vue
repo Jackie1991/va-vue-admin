@@ -1,5 +1,11 @@
 <template>
-  <el-form ref="formRef" class="va-form" :model="form" v-bind="restProps">
+  <el-form
+    ref="formRef"
+    class="va-form"
+    :model="form"
+    v-bind="restProps"
+    @keydown.enter.exact="handleFormClick(formRef, 'submit')"
+  >
     <template v-for="field in fieldList" :key="field.prop">
       <va-form-item v-model="form[field.prop]" v-bind="field">
         <template v-if="$slots[field.prop]" #[field.prop]="slotProps">

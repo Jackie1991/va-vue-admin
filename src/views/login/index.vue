@@ -1,6 +1,13 @@
 <template>
   <div class="login-container flex-y-center">
-    <va-form v-model="loginInfo" :fields="fields" submit-text="登录" size="large" @submit="handleLogin">
+    <va-form
+      v-model="loginInfo"
+      :fields="fields"
+      submit-text="登录"
+      buttons="submit"
+      size="large"
+      @submit="handleLogin"
+    >
       <template #verificationCode>
         <el-input v-model="loginInfo.verificationCode" class="verification-code" type="text">
           <template #suffix>

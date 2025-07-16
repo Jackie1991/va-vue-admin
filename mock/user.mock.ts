@@ -19,8 +19,9 @@ export default defineMock([
       code: 10000,
       message: '',
       data: {
-        username: '佚名',
+        username: 'Administrator',
         usercode: 'admin',
+        avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
       },
     },
   },

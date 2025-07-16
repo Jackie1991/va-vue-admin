@@ -23,6 +23,6 @@ export const validateEmail = (email: string) => {
  * @returns {Boolean}
  */
 export const validateMobile = (mobile: string) => {
-  const reg = /^1[3-9]\d{8}$/
+  const reg = /^1[3-9]\d{9}$/
   return reg.test(mobile)
 }

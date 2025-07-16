@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import progress from 'vite-plugin-progress'
 import { mockDevServerPlugin } from 'vite-plugin-mock-dev-server'
+import UnoCSS from 'unocss/vite'
 
 // 自定义组件解析器
 const customResolver = (name: string) => {
@@ -39,6 +40,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       vue(),
       env.VITE_MOCK_SERVER === 'true' ? mockDevServerPlugin() : null,
       vueDevTools(),
+      UnoCSS(),
       AutoImport({
         imports: [
           'vue',
@@ -74,7 +76,10 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     },
     css: {
       preprocessorOptions: {
-        scss: {},
+        scss: {
+          additionalData: `@use "@/styles/mixin.scss" as *;`,
+          api: 'modern-compiler',
+        },
       },
     },
     build: {

@@ -1,5 +1,14 @@
 /**
- * 随机数
+ * @name 获取静态资源的路径
+ * @param {string} path 资源所在目录路径
+ * @returns {string}
+ */
+export const getAssetsPath = (path: string) => {
+  return new URL(`../assets/${path}?x-oss-process=image/format,webp`, import.meta.url).href
+}
+
+/**
+ * @name 随机数
  * @param {number} m
  * @param {number} n
  * @returns {number}
