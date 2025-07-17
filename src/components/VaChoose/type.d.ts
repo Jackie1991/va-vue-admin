@@ -26,6 +26,8 @@ export type OptionType = string | number | OptionObject
 
 export type ChoosePropsType = {
   options: OptionType[]
+  disabled?: boolean
+  size?: 'small' | 'default' | 'large'
 }
 
 // select 组件内使用的props类型
