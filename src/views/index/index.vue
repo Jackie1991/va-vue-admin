@@ -3,10 +3,7 @@
     <el-row :gutter="20">
       <el-col v-for="item in totalMap" :key="item.value" :span="6" :xs="12">
         <div class="wrapper overflow-hidden clear-both">
-          <div class="icon float-left" :class="item.icon">
-            <!-- <span class="i-f7-person-2-fill"></span> -->
-            <!-- <span :class="item.icon"></span> -->
-          </div>
+          <div class="icon float-left" :class="item.icon"></div>
           <h5>{{ item.label }}</h5>
           <p>{{ item.value }}</p>
         </div>

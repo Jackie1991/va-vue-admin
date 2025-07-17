@@ -1,6 +1,11 @@
 <template>
   <div class="va-tabs flex-between">
-    <el-tabs v-model="tabActive" class="va-tabs-content" @tab-click="handleTabClick" @tab-remove="handleTabRemove">
+    <el-tabs
+      v-model="tabActive"
+      class="va-tabs-content flex-1 w0"
+      @tab-click="handleTabClick"
+      @tab-remove="handleTabRemove"
+    >
       <el-tab-pane
         v-for="item in visitedRoutes"
         :key="item.path"
@@ -89,9 +94,6 @@ watch(
 
   &-content {
     --el-tabs-header-height: var(--va-tabs-height);
-
-    flex: 1;
-    width: 0;
 
     :deep() {
       .el-tabs__header.is-top {

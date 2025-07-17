@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { map, omit, cloneDeep, throttle } from 'lodash-es'
+import { map, omit, cloneDeep } from 'lodash-es'
 import type { FormInstance } from 'element-plus'
 import type { FormProps, FormButtonType, FieldProps, FormPropsWithoutModel, FormEmits } from './type.d.ts'
 
@@ -41,6 +41,7 @@ const props = withDefaults(defineProps<FormProps>(), {
   buttons: 'submit,reset',
   submitText: '提交',
   hideButton: false,
+  throttleDelay: 1200,
 })
 // 创建表单事件
 const emits = defineEmits<FormEmits>()
@@ -68,36 +69,41 @@ const buttonList = computed<{ code: FormButtonType; type: any; name: string }[]>
     name: buttonName[button],
   }))
 })
+let lastClickType: FormButtonType | '' = ''
+let lastClickTime: number = 0
 
 // 点击表单按钮
-const handleFormClick = throttle(
-  async (formEl: FormInstance | undefined, type: FormButtonType) => {
-    if (!formEl) return
-    // 提交表单
-    if (type === 'submit') {
-      await formEl.validate((valid, fields) => {
-        if (valid) {
-          emits('submit', form.value)
-        } else {
-          console.warn('error submit!', fields)
-        }
-      })
-    }
-    // 重置表单
-    else if (type === 'reset') {
-      form.value = { ...defaultValue.value }
-      formEl.resetFields()
-      emits('reset')
-    }
-    // 取消表单
-    else if (type === 'cancel') {
-      formEl.resetFields()
-      emits('cancel')
-    }
-  },
-  1200,
-  { leading: true, trailing: false },
-)
+const handleFormClick = async (formEl: FormInstance | undefined, type: FormButtonType) => {
+  if (!formEl) return
+  const nowTime = Date.now()
+
+  // 前后两次点击类型一致且间隔时间小于 throttleDelay 设定的时间阻止后续执行
+  if (lastClickType === type && nowTime - lastClickTime <= props.throttleDelay) return
+
+  lastClickType = type
+  lastClickTime = nowTime
+  // 提交表单
+  if (type === 'submit') {
+    await formEl.validate((valid, fields) => {
+      if (valid) {
+        emits('submit', form.value)
+      } else {
+        console.warn('error submit!', fields)
+      }
+    })
+  }
+  // 重置表单
+  else if (type === 'reset') {
+    form.value = { ...defaultValue.value }
+    formEl.resetFields()
+    emits('reset')
+  }
+  // 取消表单
+  else if (type === 'cancel') {
+    formEl.resetFields()
+    emits('cancel')
+  }
+}
 
 // 表单初始化
 onMounted(() => {

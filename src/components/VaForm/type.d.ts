@@ -1,13 +1,17 @@
 import type { FormProps as ElFormProps, FormItemProps as ElFormItemProps } from 'element-plus'
+import type { SelectPropsType } from '@/components/VaSelect/type'
+import type { ChoosePropsType, ChooseType } from '@/components/VaChoose/type'
 
 // 对外暴露可配置的属性 model
 export type FormPropsWithoutModel = Partial<Omit<ElFormProps, 'model'>>
 
 // 表单项内容属性类型
-export type FormItemType = 'text' | 'textarea' | 'password' | 'tel' | 'number'
+type BasicType = 'text' | 'textarea' | 'password' | 'tel' | 'number' | 'select'
+export type FormItemType = BasicType | ChooseType
 
 // 表单内容对应属性类型
-export interface FormItemContentProps {
+type MergedProps = SelectPropsType & ChoosePropsType
+export interface FormItemContentProps extends Partial<MergedProps> {
   placeholder?: string
 }
 
@@ -33,6 +37,7 @@ export interface FormProps extends FormPropsWithoutModel {
   buttons?: Join<FormButtonType, 3, ','> // 表单内部支持的按钮类型
   submitText?: string // 提交按钮文字
   hideButton?: boolean // 隐藏表单按钮
+  throttleDelay?: number // 表单按钮点击间隔时间
 }
 
 // 表单事件类型

@@ -31,6 +31,7 @@ export default defineConfig({
     'flex-x-center': 'flex flex-items-center',
     'flex-y-center': 'flex flex-justify-center',
     'flex-column': 'flex flex-col',
+    'flex-between': 'flex flex-justify-between',
   },
   rules: [
     [
