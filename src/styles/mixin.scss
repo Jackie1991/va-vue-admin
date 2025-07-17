@@ -1,3 +1,6 @@
+@use 'sass:math'; // 引入 math 模块（小写）
+@use 'sass:string'; // 引入 string 模块（小写）
+
 /**
  * @name 文本超出省略号
  * @param $n 超出几行
@@ -13,4 +16,14 @@
     -webkit-line-clamp: $n;
     line-clamp: $n;
   }
+}
+
+/**
+ * 获取一个随即色
+ */
+@function random-color($opacity: 1) {
+  $r: math.floor(math.random() * 256);
+  $g: math.floor(math.random() * 256);
+  $b: math.floor(math.random() * 256);
+  @return rgba($r, $g, $b, $opacity);
 }

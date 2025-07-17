@@ -1,28 +1,14 @@
 <template>
   <div class="index-container">
     <el-row :gutter="20">
-      <el-col :span="6" :xs="12">
-        <div class="wrapper">
-          <h5>New Visits</h5>
-          <p>10,245</p>
-        </div>
-      </el-col>
-      <el-col :span="6" :xs="12">
-        <div class="wrapper">
-          <h5>Messages</h5>
-          <p>8,245</p>
-        </div>
-      </el-col>
-      <el-col :span="6" :xs="12">
-        <div class="wrapper">
-          <h5>Purchases</h5>
-          <p>1,445</p>
-        </div>
-      </el-col>
-      <el-col :span="6" :xs="12">
-        <div class="wrapper">
-          <h5>Shoppings</h5>
-          <p>13,650</p>
+      <el-col v-for="item in totalMap" :key="item.value" :span="6" :xs="12">
+        <div class="wrapper overflow-hidden clear-both">
+          <div class="icon float-left" :class="item.icon">
+            <!-- <span class="i-f7-person-2-fill"></span> -->
+            <!-- <span :class="item.icon"></span> -->
+          </div>
+          <h5>{{ item.label }}</h5>
+          <p>{{ item.value }}</p>
         </div>
       </el-col>
     </el-row>
@@ -54,6 +40,12 @@ import { cloneDeep } from 'lodash-es'
 import ApexCharts from 'vue3-apexcharts'
 
 /* ====== 模拟数据 ====== */
+const totalMap = [
+  { label: 'New Visits', icon: 'i-f7-person-2-fill', value: '10,245' },
+  { label: 'Messages', icon: 'i-f7-bubble-right', value: '8,245' },
+  { label: 'Purchases', icon: 'i-f7-bitcoin-circle', value: '1,445' },
+  { label: 'Shoppings', icon: 'i-f7-cart', value: '13,650' },
+]
 const chartOptions = {
   chart: {
     toolbar: false,
@@ -109,8 +101,20 @@ const pieOptions = Object.assign(cloneDeep(chartOptions), {
       font-size: 20px;
     }
 
+    .icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+    }
+
     .vue-apexcharts {
       min-height: 280px !important;
+    }
+  }
+
+  @for $i from 1 through 4 {
+    .el-col:nth-child(#{$i}) .wrapper .icon {
+      color: random-color();
     }
   }
 }

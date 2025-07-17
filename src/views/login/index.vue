@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container flex-y-center">
+  <div class="login-container flex-x-center">
     <va-form
       v-model="loginInfo"
       :fields="fields"

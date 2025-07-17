@@ -2,7 +2,6 @@
 @use 'element-plus/theme-chalk/src/display';
 @use 'element-plus/theme-chalk/src/index';
 @use './var.scss' as *;
-@use './base.scss' as *;
 
 @mixin base-scrollbar {
   &::-webkit-scrollbar {
