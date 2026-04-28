@@ -6,7 +6,17 @@ import type { ChoosePropsType, ChooseType } from '@/components/VaChoose/type'
 export type FormPropsWithoutModel = Partial<Omit<ElFormProps, 'model'>>
 
 // 表单项内容属性类型
-type BasicType = 'text' | 'textarea' | 'password' | 'tel' | 'number' | 'select'
+type BasicType =
+  | 'text'
+  | 'textarea'
+  | 'password'
+  | 'tel'
+  | 'number'
+  | 'select'
+  | 'date'
+  | 'datetime'
+  | 'image'
+  | 'richtext'
 export type FormItemType = BasicType | ChooseType
 
 // 表单内容对应属性类型

@@ -113,7 +113,16 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .va-form {
+  --va-input-width: 220px;
+
   height: fit-content;
+
+  :deep() {
+    .el-input,
+    .el-select {
+      width: var(--va-input-width);
+    }
+  }
 
   &-footer {
     margin-bottom: 0;

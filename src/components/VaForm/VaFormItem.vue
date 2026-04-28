@@ -14,6 +14,19 @@
           v-bind="{ type: type as ChooseType, options: [], ...propsAttrs.formItemContentAttrs }"
         />
       </template>
+      <template v-if="['date', 'datetime'].includes(type)">
+        <el-date-picker
+          v-model="itemValue"
+          value-format="YYYY-MM-DD HH:mm:ss"
+          v-bind="{ type: type as DatetimeType, options: [], ...propsAttrs.formItemContentAttrs }"
+        />
+      </template>
+      <template v-if="type === 'image'">
+        <va-upload v-model="itemValue" v-bind="{ ...propsAttrs.formItemContentAttrs }" />
+      </template>
+      <template v-if="type === 'richtext'">
+        <va-editor v-model="itemValue" v-bind="{ ...propsAttrs.formItemContentAttrs }" />
+      </template>
     </slot>
   </el-form-item>
 </template>
@@ -22,6 +35,8 @@
 import { keys } from 'lodash-es'
 import type { FieldProps, FormItemProps, FormItemContentProps, FormItemKeys } from './type.d.ts'
 import type { ChooseType } from '@/components/VaChoose/type'
+
+type DatetimeType = 'date' | 'datetime'
 
 // 内部使用的属性类型
 interface Props extends FieldProps {

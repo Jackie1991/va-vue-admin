@@ -4,31 +4,39 @@
       :data="list"
       index
       :fields="[
-        { label: 'a', prop: 'a' },
-        { label: 'b', prop: 'b' },
+        { label: '菜单名称', prop: 'a' },
+        { label: '路径', prop: 'b' },
       ]"
-      :page-no="query.pageNum"
+      :page-no="query.pageNo"
       :page-size="query.pageSize"
-      :total="100"
+      :total="total"
       @page-change="changePage"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-const query = reactive({
-  pageNum: 1,
+const query = reactive<Omit<PagesType, 'total'>>({
+  pageNo: 1,
   pageSize: 10,
 })
-const list = []
+const total = ref<number>(0)
+const list = ref<any[]>([])
 
+// 获取列表
+const getList = () => {
+  console.log(query)
+}
+
+// 分页切换
 const changePage = (pageNo: number, pageSize: number) => {
-  console.log(pageNo, pageSize)
-  query.pageNum = pageNo
+  query.pageNo = pageNo
   query.pageSize = pageSize
 }
+
+onMounted(() => {
+  getList()
+})
 </script>
 
-<style lang="scss" scoped>
-// .index-container {}
-</style>
+<style lang="scss" scoped></style>

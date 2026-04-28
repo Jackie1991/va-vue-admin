@@ -16,6 +16,7 @@ declare module 'vue' {
     ElCheckboxGroup: typeof import('element-plus/es')['ElCheckboxGroup']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElDivider: typeof import('element-plus/es')['ElDivider']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
@@ -40,10 +41,12 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VaAvatar: typeof import('./../src/components/VaAvatar/VaAvatar.vue')['default']
     VaChoose: typeof import('./../src/components/VaChoose/VaChoose.vue')['default']
+    VaEditor: typeof import('./../src/components/VaEditor/VaEditor.vue')['default']
     VaForm: typeof import('./../src/components/VaForm/VaForm.vue')['default']
     VaFormItem: typeof import('./../src/components/VaForm/VaFormItem.vue')['default']
     VaInlineForm: typeof import('./../src/components/VaInlineForm/VaInlineForm.vue')['default']
@@ -53,5 +56,7 @@ declare module 'vue' {
     VaSelect: typeof import('./../src/components/VaSelect/VaSelect.vue')['default']
     VaSubMenu: typeof import('./../src/components/VaMenu/VaSubMenu.vue')['default']
     VaTable: typeof import('./../src/components/VaTable/VaTable.vue')['default']
+    VaTitle: typeof import('./../src/components/VaTitle/VaTitle.vue')['default']
+    VaUpload: typeof import('./../src/components/VaUpload/VaUpload.vue')['default']
   }
 }

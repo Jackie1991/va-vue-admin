@@ -60,3 +60,12 @@ interface ComponentType {
 }
 
 type LanguageType = 'zh' | 'en'
+
+/**
+ * 定义分页属性
+ */
+type PagesType = {
+  pageNo: number
+  pageSize: number
+  total: number
+}

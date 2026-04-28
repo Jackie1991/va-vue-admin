@@ -3,6 +3,20 @@
     <el-table :data="props.data" v-bind="propsAttr">
       <el-table-column v-if="props.index" type="index" :index="forIndex" label="序号" width="68" />
       <el-table-column v-for="field in fields" :key="field.prop" v-bind="field" />
+      <el-table-column v-if="propsActions.length > 0" v-bind="propsAction">
+        <template #default="{ row }">
+          <el-button
+            v-for="({ label, type, link, disabled, onClick }, acInx) in propsActions"
+            :key="acInx"
+            :type="type"
+            :link="link"
+            :disabled="hasDisabled(disabled, row, acInx)"
+            @click="() => onClick && onClick(row, acInx)"
+          >
+            {{ label }}
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <va-pagination
       :page-no="props.pageNo"
@@ -15,9 +29,19 @@
 
 <script lang="ts" setup>
 import { omit } from 'lodash-es'
-import type { TableProps, TableEmits } from './type'
+import type { TableProps, TableEmits, TableColumnAction } from './type'
 
-const excludeProp = ['index', 'startIndex', 'selection', 'data', 'fields', 'pageNo', 'pageSize', 'total'] as const
+const excludeProp = [
+  'index',
+  'startIndex',
+  'selection',
+  'data',
+  'fields',
+  'action',
+  'pageNo',
+  'pageSize',
+  'total',
+] as const
 type ExcludeType = (typeof excludeProp)[number]
 
 // 组件的类型props和方法emit
@@ -25,8 +49,15 @@ const props = withDefaults(defineProps<TableProps>(), {
   size: 'default',
   emptyText: '暂无数据',
   pagination: true,
+  action: () => ({
+    label: '操作',
+    list: [],
+  }),
 })
 const propsAttr = computed<Omit<TableProps, ExcludeType>>(() => omit(props, excludeProp))
+const propsAction = computed<Omit<TableColumnAction, 'list'>>(() => omit(props.action, 'list'))
+const propsActions = computed(() => (Array.isArray(props.action.list) ? props.action.list : []))
+console.log(propsAction)
 
 const emits = defineEmits<TableEmits>()
 
@@ -41,6 +72,16 @@ const forIndex = (index: number) => {
 
 const paginationChange = (pageNo: number, pageSize: number) => {
   emits('page-change', pageNo, pageSize)
+}
+
+const hasDisabled = (value: any, row: any, index: number): boolean => {
+  if (typeof value === 'function') {
+    return value(row, index)
+  }
+  if (typeof value === 'boolean') {
+    return value
+  }
+  return false
 }
 </script>
 

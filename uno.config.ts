@@ -37,7 +37,7 @@ export default defineConfig({
     [
       /^pos-(absolute|fixed)-(\w+)$/,
       ([, position, value]) => {
-        const positions = {
+        const positions: any = {
           'x-center': { position, left: '50%', transform: 'translateX(-50%)' },
           'y-center': { position, top: '50%', transform: 'translateY(-50%)' },
           center: { position, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },

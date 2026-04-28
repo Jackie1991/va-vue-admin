@@ -1,11 +1,11 @@
-export type Pages = {
+export type PaginationPages = {
   pageNo?: number
   pageSize?: number
   total?: number
 }
 
 // 分页配置
-export interface PaginationProps extends Pages {
+export interface PaginationProps extends PaginationPages {
   size?: 'large' | 'default' | 'small' // 尺寸
   background?: boolean // 是否有背景色
   layout?: string // 布局，子组件名用逗号分隔

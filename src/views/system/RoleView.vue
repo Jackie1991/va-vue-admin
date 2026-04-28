@@ -1,36 +1,43 @@
 <template>
-  <div class="demo-container flex-column p4">
-    <va-inline-form
-      v-model="queryForm"
+  <div class="role-container flex-column">
+    <va-table
+      :data="list"
+      index
       :fields="[
-        { label: '标题', prop: 'title', type: 'text' },
-        {
-          label: '状态',
-          prop: 'status',
-          type: 'select',
-          options: [
-            { label: '在线', value: 'online' },
-            { label: '离线', value: 'offline' },
-          ],
-        },
+        { label: '角色名称', prop: 'name' },
+        { label: '角色类型', prop: 'tyep' },
+        { label: '角色状态', prop: 'status' },
       ]"
-      @submit="searchQuery"
+      :page-no="query.pageNo"
+      :page-size="query.pageSize"
+      :total="total"
+      @page-change="changePage"
     />
-    <va-table />
   </div>
 </template>
 
 <script lang="ts" setup>
-const queryForm = reactive<{ title: string; status: string }>({
-  title: '',
-  status: '',
+const query = reactive<Omit<PagesType, 'total'>>({
+  pageNo: 1,
+  pageSize: 10,
 })
+const total = ref<number>(0)
+const list = ref<any[]>([])
 
-const searchQuery = (values: any) => {
-  console.log(values)
+// 获取列表
+const getList = () => {
+  console.log(query)
 }
+
+// 分页切换
+const changePage = (pageNo: number, pageSize: number) => {
+  query.pageNo = pageNo
+  query.pageSize = pageSize
+}
+
+onMounted(() => {
+  getList()
+})
 </script>
 
-<style lang="scss" scoped>
-// .demo-container {}
-</style>
+<style lang="scss" scoped></style>

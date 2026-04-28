@@ -1,8 +1,9 @@
 import type { TableV2Props } from 'element-plus'
-import type { Pages } from '@/components/VaPagination/type'
+import type { PaginationPages } from '@/components/VaPagination/type'
 
 export type TableProp = TableV2Props
 
+// 列配置
 export type TableColumnField = {
   label: string
   prop: string
@@ -15,8 +16,26 @@ export type TableColumnField = {
   formatter?: (row: any, column: any, cellValue: any, index: number) => string
 }
 
+// 操作列配置项
+export type TableColumnActionItem = {
+  label: string
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text'
+  link?: boolean
+  disabled?: (row: any, index: number) => boolean
+  onClick?: (row: any, index: number) => void
+}
+
+// 操作列配置
+export type TableColumnAction = {
+  label?: string
+  width?: number | string
+  minWidth?: number | string
+  fixed?: 'left' | 'center' | 'right'
+  list: TableColumnActionItem[]
+}
+
 // 表格配置
-export interface TableProps extends Pages {
+export interface TableProps extends PaginationPages {
   data: any[]
   fields: TableColumnField[]
   index?: boolean // 是否显示序号
@@ -26,6 +45,7 @@ export interface TableProps extends Pages {
   size?: '' | 'large' | 'default' | 'small' // 表格尺寸
   emptyText?: string // 空数据时显示的文本内容
   pagination?: boolean // 是否显示分页
+  action?: TableColumnAction // 操作列
 }
 
 export interface TableEmits {

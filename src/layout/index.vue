@@ -91,6 +91,7 @@ onBeforeUnmount(() => {
     [class*='-container'] {
       min-height: calc(100vh - var(--va-nav-height) - var(--va-tabs-height) - var(--va-padding) * 2);
       background-color: white;
+      padding: 20px;
     }
   }
 
