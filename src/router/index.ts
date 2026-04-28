@@ -75,6 +75,40 @@ export const homeRoutes: VaRouteRecord = {
 // 路由列表
 export const asyncRoutes: VaRouteRecord[] = [
   {
+    path: '/system',
+    name: 'System',
+    component: Layout,
+    meta: {
+      title: '系统管理',
+    },
+    children: [
+      {
+        path: '/system/MenuView',
+        name: 'SystemMenu',
+        component: () => import('@/views/system/MenuView.vue'),
+        meta: {
+          title: '菜单管理',
+        },
+      },
+      {
+        path: '/system/RoleView',
+        name: 'SystemRole',
+        component: () => import('@/views/system/RoleView.vue'),
+        meta: {
+          title: '角色管理',
+        },
+      },
+      {
+        path: '/system/UserView',
+        name: 'SystemUser',
+        component: () => import('@/views/system/UserView.vue'),
+        meta: {
+          title: '用户管理',
+        },
+      },
+    ],
+  },
+  {
     path: '/web',
     name: 'Web',
     component: () => import('@/views/web/index.vue'),
@@ -82,32 +116,6 @@ export const asyncRoutes: VaRouteRecord[] = [
       title: '门户',
       target: '_blank',
     },
-  },
-  {
-    path: '/demo',
-    name: 'Demo',
-    component: Layout,
-    meta: {
-      title: 'DEMO',
-    },
-    children: [
-      {
-        path: '/demo',
-        name: 'DemoHome',
-        component: () => import('@/views/demo/index.vue'),
-        meta: {
-          title: 'DEMO',
-        },
-      },
-      {
-        path: '/Detail',
-        name: 'Detail',
-        component: () => import('@/views/demo/detail.vue'),
-        meta: {
-          title: '表单',
-        },
-      },
-    ],
   },
 ]
 

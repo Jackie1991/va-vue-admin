@@ -4,18 +4,16 @@ type CheckboxType = 'checkbox'
 type ChooseType = RadioType | CheckboxType
 
 // 选中值的类型
-type BaseValue = string | number
-type RadioValue = BaseValue | undefined
-type CheckboxValue = BaseValue[]
+export type ModelValueType = string | number | boolean | undefined
 
 interface RadioConfig {
   type: RadioType
-  modelValue: RadioValue
+  modelValue: ModelValueType
 }
 
 interface CheckboxConfig {
   type: CheckboxType
-  modelValue: CheckboxValue
+  modelValue: ModelValueType[]
 }
 
 type ChooseConfig = RadioConfig | CheckboxConfig

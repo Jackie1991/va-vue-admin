@@ -34,6 +34,7 @@ const convertRouter = (routes: VaRouteRecord[]) => {
         route.children = convertRouter(route.children)
       } else delete route.children
     }
+
     return route
   })
 }
