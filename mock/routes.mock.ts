@@ -48,10 +48,7 @@ export default defineMock([
             {
               name: 'ActivityDetail',
               path: '/activity/detail',
-              meta: {
-                title: '活动详情',
-                hidden: true,
-              },
+              meta: { title: '活动详情', hidden: true },
             },
           ],
         },
@@ -91,6 +88,11 @@ export default defineMock([
               name: 'ContentCenter',
               path: '/content',
               meta: { title: '内容中心' },
+            },
+            {
+              name: 'ContentDetail',
+              path: '/content/detail',
+              meta: { title: '内容详情', hidden: true },
             },
           ],
         },

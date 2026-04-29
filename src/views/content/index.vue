@@ -1,5 +1,5 @@
 <template>
-  <div class="activity-container flex-column">
+  <div class="content-container flex-column">
     <va-inline-form
       v-model="formQuery"
       :fields="[
@@ -10,7 +10,7 @@
     />
     <va-title text="内容中心">
       <template #action>
-        <el-button type="primary" @click="$router.push('/activity/detail')">发布</el-button>
+        <el-button type="primary" @click="$router.push('/content/detail')">发布</el-button>
       </template>
     </va-title>
     <va-table
@@ -40,10 +40,7 @@ const pageQuery = reactive<Omit<PagesType, 'total'>>({
   pageNo: 1,
   pageSize: 10,
 })
-const formQuery = reactive({
-  pageNo: 1,
-  pageSize: 10,
-})
+const formQuery = ref<any>({})
 const total = ref<number>(0)
 const list = ref<any[]>([
   { id: 1, title: '张三', type: '客户', startTime: '2022-01-01', endTime: '2022-01-01', publishTime: '2022-01-01' },
@@ -60,7 +57,7 @@ const actionConfig: TableColumnAction = {
       link: true,
       onClick: (row: any) => {
         console.log('编辑', row)
-        router.push(`/activity/detail?id=${row.id}`)
+        router.push(`/content/detail?id=${row.id}`)
       },
     },
     { label: '删除', type: 'danger', link: true },

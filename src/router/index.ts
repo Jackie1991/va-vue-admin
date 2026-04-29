@@ -187,6 +187,15 @@ export const asyncRoutes: VaRouteRecord[] = [
           title: '内容中心',
         },
       },
+      {
+        path: '/content/detail',
+        name: 'ContentDetail',
+        component: () => import('@/views/content/detail.vue'),
+        meta: {
+          title: '内容详情',
+          hidden: true,
+        },
+      },
     ],
   },
   // {

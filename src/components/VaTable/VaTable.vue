@@ -57,7 +57,6 @@ const props = withDefaults(defineProps<TableProps>(), {
 const propsAttr = computed<Omit<TableProps, ExcludeType>>(() => omit(props, excludeProp))
 const propsAction = computed<Omit<TableColumnAction, 'list'>>(() => omit(props.action, 'list'))
 const propsActions = computed(() => (Array.isArray(props.action.list) ? props.action.list : []))
-console.log(propsAction)
 
 const emits = defineEmits<TableEmits>()
 
