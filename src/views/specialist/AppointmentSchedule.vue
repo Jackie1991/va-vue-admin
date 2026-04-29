@@ -1,5 +1,5 @@
 <template>
-  <div class="activity-container flex-column">
+  <div class="specialist-container flex-column">
     <va-inline-form
       v-model="formQuery"
       :fields="[

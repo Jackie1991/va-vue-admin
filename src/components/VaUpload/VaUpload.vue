@@ -13,9 +13,9 @@
     >
       <el-icon><plus /></el-icon>
     </el-upload>
-    <el-dialog class="el-dialog-light" v-model="dialogVisible" fullscreen append-to-body destroy-on-close>
+    <va-dialog class-name="el-dialog-light" v-model="dialogVisible" fullscreen append-to-body>
       <img w-full :src="dialogImageUrl" alt="Preview Image" />
-    </el-dialog>
+    </va-dialog>
   </div>
 </template>
 

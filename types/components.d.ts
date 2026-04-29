@@ -49,6 +49,7 @@ declare module 'vue' {
     VaAvatar: typeof import('./../src/components/VaAvatar/VaAvatar.vue')['default']
     VaCheckbox: typeof import('./../src/components/VaCheckbox/VaCheckbox.vue')['default']
     VaChoose: typeof import('../src/components/VaRadio/VaRadio.vue')['default']
+    VaDialog: typeof import('./../src/components/VaDialog/VaDialog.vue')['default']
     VaEditor: typeof import('./../src/components/VaEditor/VaEditor.vue')['default']
     VaForm: typeof import('./../src/components/VaForm/VaForm.vue')['default']
     VaFormItem: typeof import('./../src/components/VaForm/VaFormItem.vue')['default']
