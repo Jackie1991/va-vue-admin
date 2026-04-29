@@ -12,7 +12,7 @@
     <div class="wrapper">
       <apex-charts type="line" :options="lineOptions" :series="series" />
     </div>
-    <el-row :gutter="20">
+    <!-- <el-row :gutter="20">
       <el-col :span="8" :xs="24">
         <div class="wrapper">
           <apex-charts type="radar" :options="radarOptions" :series="series" />
@@ -28,7 +28,7 @@
           <apex-charts type="bar" :options="chartOptions" :series="series" />
         </div>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 
@@ -46,6 +46,7 @@ const totalMap = [
 const chartOptions = {
   chart: {
     toolbar: false,
+    zoom: { enabled: false },
   },
   stroke: {
     curve: 'smooth',
@@ -57,20 +58,20 @@ const series = [
   { name: 'actual', data: [43, 52, 57, 60, 78, 40] },
 ]
 const lineOptions = Object.assign(cloneDeep(chartOptions), {})
-const radarOptions = Object.assign(cloneDeep(chartOptions), {
-  fill: {
-    opacity: 1,
-  },
-  stroke: {
-    show: false,
-  },
-  markers: {
-    size: 0,
-  },
-})
-const pieOptions = Object.assign(cloneDeep(chartOptions), {
-  labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'Bananan'],
-})
+// const radarOptions = Object.assign(cloneDeep(chartOptions), {
+//   fill: {
+//     opacity: 1,
+//   },
+//   stroke: {
+//     show: false,
+//   },
+//   markers: {
+//     size: 0,
+//   },
+// })
+// const pieOptions = Object.assign(cloneDeep(chartOptions), {
+//   labels: ['Apple', 'Mango', 'Orange', 'Watermelon', 'Bananan'],
+// })
 </script>
 
 <style lang="scss" scoped>

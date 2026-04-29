@@ -8,11 +8,11 @@
       <template v-if="type === 'select'">
         <va-select v-model="itemValue" v-bind="{ options: [], ...propsAttrs.formItemContentAttrs }" />
       </template>
-      <template v-if="['radio', 'checkbox'].includes(type)">
-        <va-choose
-          v-model="itemValue"
-          v-bind="{ type: type as ChooseType, options: [], ...propsAttrs.formItemContentAttrs }"
-        />
+      <template v-if="type === 'radio'">
+        <va-radio v-model="itemValue" v-bind="{ options: [], ...propsAttrs.formItemContentAttrs }" />
+      </template>
+      <template v-if="type === 'checkbox'">
+        <va-checkbox v-model="itemValue" v-bind="{ options: [], ...propsAttrs.formItemContentAttrs }" />
       </template>
       <template v-if="['date', 'datetime'].includes(type)">
         <el-date-picker
@@ -34,7 +34,6 @@
 <script setup lang="ts">
 import { keys } from 'lodash-es'
 import type { FieldProps, FormItemProps, FormItemContentProps, FormItemKeys } from './type.d.ts'
-import type { ChooseType } from '@/components/VaChoose/type'
 
 type DatetimeType = 'date' | 'datetime'
 

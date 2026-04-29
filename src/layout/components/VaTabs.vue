@@ -13,7 +13,7 @@
         :closable="!(item.meta && item.meta.noClosable)"
       >
         <template #label>
-          <span class="va-tabs-title" @contextmenu.prevent="openMenu(item)">{{ item.meta.title }}</span>
+          <span class="va-tabs-title text-ellipsis" @contextmenu.prevent="openMenu(item)">{{ item.meta.title }}</span>
         </template>
       </el-tab-pane>
     </el-tabs>
@@ -108,6 +108,11 @@ watch(
         display: none;
       }
     }
+  }
+
+  &-title {
+    display: block;
+    max-width: 120px;
   }
 }
 </style>

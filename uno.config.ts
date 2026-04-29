@@ -32,6 +32,7 @@ export default defineConfig({
     'flex-y-center': 'flex flex-justify-center',
     'flex-column': 'flex flex-col',
     'flex-between': 'flex flex-justify-between',
+    'text-ellipsis': 'text-ellipsis whitespace-nowrap overflow-hidden',
   },
   rules: [
     [

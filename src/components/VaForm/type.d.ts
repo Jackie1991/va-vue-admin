@@ -1,26 +1,28 @@
 import type { FormProps as ElFormProps, FormItemProps as ElFormItemProps } from 'element-plus'
 import type { SelectPropsType } from '@/components/VaSelect/type'
-import type { ChoosePropsType, ChooseType } from '@/components/VaChoose/type'
+import type { CheckboxPropsType } from '@/components/VaCheckbox/type'
+import type { RadioPropsType } from '@/components/VaRadio/type'
 
 // 对外暴露可配置的属性 model
 export type FormPropsWithoutModel = Partial<Omit<ElFormProps, 'model'>>
 
 // 表单项内容属性类型
-type BasicType =
+export type FormItemType =
   | 'text'
   | 'textarea'
   | 'password'
   | 'tel'
   | 'number'
   | 'select'
+  | 'radio'
+  | 'checkbox'
   | 'date'
   | 'datetime'
   | 'image'
   | 'richtext'
-export type FormItemType = BasicType | ChooseType
 
 // 表单内容对应属性类型
-type MergedProps = SelectPropsType & ChoosePropsType
+type MergedProps = SelectPropsType & CheckboxPropsType & RadioPropsType
 export interface FormItemContentProps extends Partial<MergedProps> {
   placeholder?: string
 }

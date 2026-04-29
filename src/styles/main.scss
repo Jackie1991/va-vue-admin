@@ -62,5 +62,15 @@ html {
       -webkit-tap-highlight-color: transparent;
       -webkit-font-smoothing: antialiased;
     }
+
+    .el-dialog {
+      &.el-dialog-light {
+        background: none;
+
+        .el-icon.el-dialog__close {
+          color: white;
+        }
+      }
+    }
   }
 }

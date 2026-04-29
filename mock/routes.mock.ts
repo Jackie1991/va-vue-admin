@@ -10,7 +10,7 @@ export default defineMock([
       data: [
         {
           name: 'System',
-          path: '/',
+          path: '/system',
           meta: {
             title: '系统管理',
           },
@@ -34,7 +34,7 @@ export default defineMock([
         },
         {
           name: 'Activity',
-          path: '/',
+          path: '/activity',
           meta: {
             title: '活动管理',
             levelHidden: true,
@@ -56,13 +56,52 @@ export default defineMock([
           ],
         },
         {
-          path: '/web',
-          name: 'Web',
+          name: 'Specialist',
+          path: '/specialist',
           meta: {
-            title: '门户网站',
-            target: '_blank',
+            title: '专家管理',
           },
+          children: [
+            {
+              name: 'SpecialistHome',
+              path: '/specialist',
+              meta: { title: '专家列表' },
+            },
+            {
+              name: 'ShiftSchedule',
+              path: '/specialist/ShiftSchedule',
+              meta: { title: '日历排班表' },
+            },
+            {
+              name: 'Appointment',
+              path: '/specialist/AppointmentSchedule',
+              meta: { title: '预约时间表' },
+            },
+          ],
         },
+        {
+          name: 'Content',
+          path: '/content',
+          meta: {
+            title: '内容管理',
+            levelHidden: true,
+          },
+          children: [
+            {
+              name: 'ContentCenter',
+              path: '/content',
+              meta: { title: '内容中心' },
+            },
+          ],
+        },
+        // {
+        //   path: '/web',
+        //   name: 'Web',
+        //   meta: {
+        //     title: '门户网站',
+        //     target: '_blank',
+        //   },
+        // },
       ],
     },
   },

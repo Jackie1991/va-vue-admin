@@ -28,5 +28,10 @@ export const useTabsStore = defineStore('tabs', () => {
     removeVisitedRoute: (path: string) => {
       visitedRoutes.value = visitedRoutes.value.filter((item) => item.path !== path)
     },
+    // 修改标签名称
+    changeVisitedRouteTitle: (path: string, title: string) => {
+      const index = visitedRoutes.value.findIndex((item) => item.path === path)
+      visitedRoutes.value[index].meta.title = title
+    },
   }
 })

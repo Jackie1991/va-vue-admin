@@ -109,14 +109,95 @@ export const asyncRoutes: VaRouteRecord[] = [
     ],
   },
   {
-    path: '/web',
-    name: 'Web',
-    component: () => import('@/views/web/index.vue'),
+    path: '/activity',
+    name: 'Activity',
+    component: Layout,
     meta: {
-      title: '门户',
-      target: '_blank',
+      title: '活动管理',
+      levelHidden: true,
     },
+    children: [
+      {
+        path: '/activity',
+        name: 'ActivityHome',
+        component: () => import('@/views/activity/index.vue'),
+        meta: {
+          title: '活动管理',
+        },
+      },
+      {
+        path: '/activity/detail',
+        name: 'ActivityDetail',
+        component: () => import('@/views/activity/detail.vue'),
+        meta: {
+          title: '活动详情',
+          hidden: true,
+        },
+      },
+    ],
   },
+  {
+    name: 'Specialist',
+    path: '/specialist',
+    component: Layout,
+    meta: {
+      title: '专家管理',
+    },
+    children: [
+      {
+        name: 'SpecialistHome',
+        path: '/specialist',
+        component: () => import('@/views/specialist/index.vue'),
+        meta: {
+          title: '专家列表',
+        },
+      },
+      {
+        path: '/specialist/ShiftSchedule',
+        name: 'ShiftSchedule',
+        component: () => import('@/views/specialist/ShiftSchedule.vue'),
+        meta: {
+          title: '日历排班表',
+        },
+      },
+      {
+        path: '/specialist/AppointmentSchedule',
+        name: 'Appointment',
+        component: () => import('@/views/specialist/AppointmentSchedule.vue'),
+        meta: {
+          title: '预约时间表',
+        },
+      },
+    ],
+  },
+  {
+    path: '/content',
+    name: 'Content',
+    component: Layout,
+    meta: {
+      title: '内容管理',
+      levelHidden: true,
+    },
+    children: [
+      {
+        path: '/content',
+        name: 'ContentCenter',
+        component: () => import('@/views/content/index.vue'),
+        meta: {
+          title: '内容中心',
+        },
+      },
+    ],
+  },
+  // {
+  //   path: '/web',
+  //   name: 'Web',
+  //   component: () => import('@/views/web/index.vue'),
+  //   meta: {
+  //     title: '门户',
+  //     target: '_blank',
+  //   },
+  // },
 ]
 
 // 创建路由实例并传递 `routes` 配置

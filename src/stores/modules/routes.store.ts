@@ -12,7 +12,7 @@ const convertRouter = (routes: VaRouteRecord[]) => {
   const viewsComMap = import.meta.glob([
     '/src/views/**/*.vue',
     '!/src/views/**/components/**', // 排除views目录下页面内的components目录下的文件
-    '!/src/views/{index,login,error}/**', // 排除views目录下的index,login,error目录
+    '!/src/views/{login,error}/**', // 排除views目录下的login,error目录
   ])
   return routes.map((route: VaRouteRecord) => {
     if (route.component) {
