@@ -26,9 +26,18 @@ const restProps = computed(() => omit(props, ['modelValue']))
 
 <style lang="scss" scoped>
 .va-inline-form {
+  --va-input-width: 220px;
+
+  height: fit-content;
+
   :deep() {
     .va-form-item {
       min-width: 221px;
+
+      .el-input,
+      .el-select {
+        width: var(--va-input-width);
+      }
     }
 
     .va-form-footer {
