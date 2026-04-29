@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
 import { stringify } from 'qs'
+import { findLastIndex } from 'lodash-es'
 import { useTabsStore } from '@/stores'
 
 const route = useRoute()
@@ -52,7 +53,8 @@ const addTabs = async (route: VaRoute) => {
  * 跳转最后一个标签页
  */
 const toLastTab = async () => {
-  const latestView = visitedRoutes.value.find((item) => item.path !== tabActive.value)
+  const lastRoutesIndex = findLastIndex(visitedRoutes.value, (item: any) => item.path !== tabActive.value)
+  const latestView = visitedRoutes.value[lastRoutesIndex]
   if (latestView) await router.push(latestView)
   else await router.push('/')
 }
