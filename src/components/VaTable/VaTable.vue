@@ -2,7 +2,20 @@
   <div class="va-table">
     <el-table :data="props.data" v-bind="propsAttr">
       <el-table-column v-if="props.index" type="index" :index="forIndex" label="序号" width="68" />
-      <el-table-column v-for="field in fields" :key="field.prop" v-bind="field" />
+      <el-table-column v-for="field in fields" :key="field.prop" v-bind="field">
+        <template #default="{ row }">
+          <el-image
+            v-if="field.columnType === 'image'"
+            class="va-table-image"
+            :src="row[field.prop]"
+            preview-teleported
+            :preview-src-list="[row[field.prop]]"
+          />
+          <template v-else>
+            {{ row[field.prop] }}
+          </template>
+        </template>
+      </el-table-column>
       <el-table-column v-if="propsActions.length > 0" v-bind="propsAction">
         <template #default="{ row }">
           <el-button
@@ -88,6 +101,12 @@ const hasDisabled = (value: any, row: any, index: number): boolean => {
 .va-table {
   .el-table {
     width: 100%;
+  }
+
+  .va-table-image {
+    display: block;
+    width: 60px;
+    height: 60px;
   }
 }
 </style>

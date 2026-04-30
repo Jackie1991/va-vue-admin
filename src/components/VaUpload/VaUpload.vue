@@ -13,7 +13,7 @@
     >
       <el-icon><plus /></el-icon>
     </el-upload>
-    <va-dialog class-name="el-dialog-light" v-model="dialogVisible" fullscreen append-to-body>
+    <va-dialog class-name="el-dialog-light" v-model="dialogVisible" fullscreen>
       <img w-full :src="dialogImageUrl" alt="Preview Image" />
     </va-dialog>
   </div>

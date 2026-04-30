@@ -12,7 +12,7 @@ import { useTabsStore } from '@/stores'
 const route = useRoute()
 const tabsStore = useTabsStore()
 const { changeVisitedRouteTitle } = tabsStore
-const formData = ref<any>({})
+const formData = ref<Record<string, any>>({})
 const fields: FieldProps[] = [
   { label: '活动标题', prop: 'title', type: 'text', placeholder: '请输入活动标题', required: true },
   { label: '活动封面', prop: 'cover', type: 'image', placeholder: '请上传活动封面' },
@@ -58,7 +58,7 @@ onBeforeMount(() => {
   } else {
     newTitle = '活动发布'
   }
-  changeVisitedRouteTitle(route.path, newTitle)
+  changeVisitedRouteTitle(route.fullPath, newTitle)
 })
 
 onMounted(() => {

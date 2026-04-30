@@ -51,7 +51,7 @@ onBeforeMount(() => {
   } else {
     newTitle = '内容发布'
   }
-  changeVisitedRouteTitle(route.path, newTitle)
+  changeVisitedRouteTitle(route.fullPath, newTitle)
 })
 
 onMounted(() => {

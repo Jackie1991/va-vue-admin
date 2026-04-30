@@ -38,18 +38,15 @@
 import type { TableColumnAction } from '@/components/VaTable/type'
 import router from '@/router'
 
+// 分页参数
 const pageQuery = reactive<Omit<PagesType, 'total'>>({
   pageNo: 1,
   pageSize: 10,
 })
-const formQuery = reactive({
-  pageNo: 1,
-  pageSize: 10,
-})
-const total = ref<number>(0)
-const list = ref<any[]>([
-  { id: 1, title: '张三', type: '客户', startTime: '2022-01-01', endTime: '2022-01-01', publishTime: '2022-01-01' },
-])
+// 列表查询参数
+const formQuery = ref<any>({})
+const total = ref<number>(0) // 分页总数
+const list = ref<any[]>([]) // 列表数据
 
 const actionConfig: TableColumnAction = {
   label: '操作',

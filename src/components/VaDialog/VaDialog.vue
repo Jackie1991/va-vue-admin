@@ -1,5 +1,11 @@
 <template>
-  <el-dialog :class="`va-dialog ${className}`" v-model="dialogVisible" destroy-on-close v-bind="propsAttr">
+  <el-dialog
+    :class="`va-dialog ${className}`"
+    v-model="dialogVisible"
+    destroy-on-close
+    v-bind="propsAttr"
+    @close="emits('close')"
+  >
     <slot></slot>
   </el-dialog>
 </template>
@@ -15,7 +21,7 @@ type ExcludeType = (typeof excludeProp)[number]
 const props = withDefaults(defineProps<DialogProps>(), {
   className: '',
   fullscreen: false,
-  appendToBody: false,
+  appendToBody: true,
 })
 const propsAttr = computed<Omit<DialogProps, ExcludeType>>(() => omit(props, excludeProp))
 const emits = defineEmits<DialogEmits>()

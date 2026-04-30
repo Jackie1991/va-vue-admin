@@ -3,7 +3,12 @@
     <!-- 表单插槽 将表单元素的props传入 -->
     <slot :name="prop" :config="propsAttrs.formItemContentAttrs">
       <template v-if="['text', 'textarea', 'password', 'tel', 'number'].includes(type)">
-        <el-input v-model="itemValue" :show-password="type === 'password'" v-bind="propsAttrs.formItemContentAttrs" />
+        <el-input
+          v-model="itemValue"
+          :show-password="type === 'password'"
+          resize="none"
+          v-bind="{ type, ...propsAttrs.formItemContentAttrs }"
+        />
       </template>
       <template v-if="type === 'select'">
         <va-select v-model="itemValue" v-bind="{ options: [], ...propsAttrs.formItemContentAttrs }" />

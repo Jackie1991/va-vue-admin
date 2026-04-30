@@ -14,6 +14,7 @@ export type TableColumnField = {
   showOverflowTooltip?: boolean
   fixed?: boolean
   formatter?: (row: any, column: any, cellValue: any, index: number) => string
+  columnType?: 'text' | 'image' | 'link'
 }
 
 // 操作列配置项

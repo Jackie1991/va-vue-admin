@@ -10,7 +10,7 @@
     />
     <va-title text="专家列表">
       <template #action>
-        <el-button type="primary" @click="$router.push('/activity/detail')">新增</el-button>
+        <el-button type="primary" @click="toggleDialog('add')">新增</el-button>
       </template>
     </va-title>
     <va-table
@@ -18,10 +18,10 @@
       index
       :fields="[
         { label: '姓名', prop: 'name' },
-        { label: '类型', prop: 'type' },
-        { label: '开始时间', prop: 'startTime' },
-        { label: '结束时间', prop: 'endTime' },
-        { label: '发布时间', prop: 'publishTime' },
+        { label: '照片', prop: 'photo', columnType: 'image', width: 84 },
+        { label: '擅长领域', prop: 'field' },
+        { label: '专业背景', prop: 'background' },
+        { label: '从业经历', prop: 'experience' },
       ]"
       :page-no="pageQuery.pageNo"
       :page-size="pageQuery.pageSize"
@@ -29,23 +29,31 @@
       :action="actionConfig"
       @page-change="changePage"
     />
+
+    <va-dialog v-model="dialogVisible" :title="dialogTitle" @close="closeDialog">
+      <va-form v-model="formData" :fields="fields" :rules="rules" @submit="formSubmit" />
+    </va-dialog>
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { TableColumnAction } from '@/components/VaTable/type'
-import router from '@/router'
+import type { FieldProps } from '@/components/VaForm/type'
 
+// 分页参数
 const pageQuery = reactive<Omit<PagesType, 'total'>>({
   pageNo: 1,
   pageSize: 10,
 })
-const formQuery = ref<any>({})
-const total = ref<number>(0)
-const list = ref<any[]>([
-  { id: 1, title: '张三', type: '客户', startTime: '2022-01-01', endTime: '2022-01-01', publishTime: '2022-01-01' },
-])
+// 列表查询参数
+const formQuery = ref<Record<string, any>>({})
+const total = ref<number>(0) // 分页总数
+const list = ref<any[]>([]) // 列表数据
+const dialogVisible = ref<boolean>(false) // 弹窗显示
+const dialogTitle = ref<string>('') // 弹窗显示
+const formData = ref<Record<string, any>>({}) // 表单数据
 
+// 列表操作配置
 const actionConfig: TableColumnAction = {
   label: '操作',
   fixed: 'right',
@@ -57,11 +65,34 @@ const actionConfig: TableColumnAction = {
       link: true,
       onClick: (row: any) => {
         console.log('编辑', row)
-        router.push(`/activity/detail?id=${row.id}`)
+        toggleDialog('edit', row)
       },
     },
-    { label: '删除', type: 'danger', link: true },
+    {
+      label: '删除',
+      type: 'danger',
+      link: true,
+      onClick: (row: any) => {
+        console.log('删除', row)
+      },
+    },
   ],
+}
+
+// 表单配置
+const fields: FieldProps[] = [
+  { label: '姓名', prop: 'name', type: 'text', placeholder: '请输入姓名', required: true },
+  { label: '照片', prop: 'photo', type: 'image', placeholder: '请上传照片' },
+  { label: '擅长领域', prop: 'field', type: 'textarea', placeholder: '请输入擅长领域', required: true },
+  { label: '专业背景', prop: 'background', type: 'textarea', placeholder: '请输入专业背景', required: true },
+  { label: '从业经历', prop: 'experience', type: 'textarea', placeholder: '请输入从业经历', required: true },
+]
+// 表单校验规则
+const rules = {
+  name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+  field: [{ required: true, message: '请输入擅长领域', trigger: 'blur' }],
+  background: [{ required: true, message: '请输入专业背景', trigger: 'blur' }],
+  experience: [{ required: true, message: '请输入从业经历', trigger: 'blur' }],
 }
 
 // 获取列表
@@ -81,6 +112,29 @@ const changePage = (pageNo: number, pageSize: number) => {
   pageQuery.pageNo = pageNo
   pageQuery.pageSize = pageSize
   getList()
+}
+
+// 弹窗切换
+const toggleDialog = (type: 'add' | 'edit', row?: any) => {
+  dialogTitle.value = type === 'add' ? '新增专家' : '编辑专家'
+  if (type === 'edit') {
+    formData.value = row
+  } else {
+    formData.value = {}
+  }
+  dialogVisible.value = true
+}
+
+// 关闭弹窗
+const closeDialog = () => {
+  formData.value = {}
+  dialogVisible.value = false
+}
+
+// 表单提交
+const formSubmit = () => {
+  console.log('表单提交', formData.value)
+  closeDialog()
 }
 
 onMounted(() => {

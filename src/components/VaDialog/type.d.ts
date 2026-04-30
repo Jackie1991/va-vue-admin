@@ -10,4 +10,5 @@ export interface DialogProps {
 // 上传文件方法
 export interface DialogEmits {
   (e: 'update:modelValue', values: boolean): void
+  (e: 'close'): void
 }
